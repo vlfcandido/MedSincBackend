@@ -34,3 +34,5 @@ yarn-error.log*
 .env
 .env.*
 !.env.example
+# resultados dos testes de integração
+tests/integracao/*.json
