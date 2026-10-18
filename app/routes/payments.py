@@ -10,9 +10,8 @@ payment_repository = PaymentRepository()
 @payment_bp.route('/', methods=['GET'])
 @token_required
 def get_payments(current_user):
-    payments = payment_repository.get_all(db.session)
-    if not isinstance(payments, list):
-        return jsonify(payments.to_dict())
+    # Antes chamava get_all sem existir (HTTP 500); agora lista só os pagamentos do médico logado.
+    payments = payment_repository.get_all(db.session, current_user.id)
     return jsonify([payment.to_dict() for payment in payments])
 
 @payment_bp.route('/', methods=['POST'])
